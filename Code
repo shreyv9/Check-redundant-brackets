@@ -1,0 +1,34 @@
+#include<stack>
+#include<string.h>
+bool checkRedundantBrackets(string expression) {
+	//Initializing Count Variable and Stack
+    int count;
+    stack<char> s;
+    //Initialing for Loop
+    for(int i=0;i<expression.length();i++){
+       /*Agar string ka character end bracket nahi hai toh usko ander daldo stack ke*/
+        if(expression[i]!=')'){
+            s.push(expression[i]);
+        }
+        else{
+            /*agar string ka charcter closing bracket ke equal hai to count variable to 0 krna hai or else 
+            block me aa jana hai*/
+            count=0;
+            //jab tak top ka element opening bracket nahi aata tab tak while loo chalega
+            while(s.top()!='('){
+                /* ab is loop me ham count ki value increase karenge or pop karenga jisse ham ye idea ho jayea ki 
+                kitne element the in dono ke beec h me*/
+                count++; 
+                s.pop();
+            }
+            s.pop();//idhar wo left bracket bhi bahar nikal jayega
+            
+            /*jo element hamne pop out kare hain agar unka number 0 ya 1 hua to true return kardo, 
+            jiska matlb hai ki isme redundant bracket hain*/
+            if(count==0 || count==1){
+                return true;
+            }
+        }
+    }
+    return false;
+}
